@@ -1,0 +1,59 @@
+.converter{
+	width: 280px;
+	&__from-label{
+		position: absolute;
+		top: 50%;
+		transform: translate(-0%, -50%);
+	}
+}
+
+input{
+	font-size: 26px;
+	font-family: 'PT Mono', monospace;
+}
+.form {
+	width: 300px;
+	padding: 20px;
+		&__inner{
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			background-color: rgba(255, 255, 255, 0.075);
+			padding: 10px;
+			border-radius: 8px;
+			margin-bottom: 2px;
+			&::after{
+				content: '';
+				position: absolute;
+				transform: translate(-50%, -50%);
+				top: 50%;
+				left: 120px;
+				width: 8px;
+				height: 14px;
+				background-image: url('/images/arrow.svg');
+			}
+		}
+		&__to-input,
+		&__from-input {
+			background-size: 40px 20px;
+			background-repeat: no-repeat;
+			background-position: 55px 5px;
+			color: #fff;
+			width: 115px;
+			display: flex;
+			align-items: center;
+		}
+		&__result,
+		&__amount{
+			color: #fff;
+			text-align: right;
+			width: 120px;
+			font-size: 26px;
+		}
+		&__descr {
+			display: block;
+			font-size: 12px;
+			height: 18px;
+			margin-bottom: 15px;
+		}
+}
