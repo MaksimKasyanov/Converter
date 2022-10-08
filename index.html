@@ -18,71 +18,58 @@
 			<button class="switch-to switch-to__calc switch-to__active">Calculator</button>
 			<button class="switch-to switch-to__convert">Exchange Rate</button>
 		</div>
-		<div class="calculator__screen-wrapper">
-			<div class="calculator__screen">
-				<form class="form">
-					<div class="form__inner">
-						<input class="form__from-input" placeholder="From" required/>
-						<input class="form__amount" type="text" placeholder="0.00" value="100" disabled>
-					</div>
-					<span class="form__descr form__from-descr">Enter a currency</span>
-					<div class="form__inner">
-						<input class="form__to-input" placeholder="To" required/>
-						<p class="form__result">0</p>
-					</div>
-					<span class="form__descr form__to-descr">Enter a currency</span>
-				</form>
-				<!-- <input class="calculator__screen-output" type="text" disabled> -->
-			</div>
-		</div>
+			<form class="form">
+				<div class="form__inner">
+					<input class="form__from-input" placeholder="From" required/>
+					<input class="form__amount" type="text" placeholder="0.00" disabled>
+				</div>
+				<span class="form__descr form__from-descr">Enter a currency</span>
+				<div class="form__inner form__inner-result">
+					<input class="form__to-input" placeholder="To" required/>
+					<p class="form__result"></p>
+				</div>
+				<span class="form__descr form__to-descr">Enter a currency</span>
+			</form>
 		<div class="keyboard">
 			<div class="keyboard__left">
-				<button class="keyboard__btn keyboard__number" value="7">7</button>
-				<button class="keyboard__btn keyboard__number" value="8">8</button>
-				<button class="keyboard__btn keyboard__number" value="9">9</button>
-				<button class="keyboard__btn keyboard__number" value="4">4</button>
-				<button class="keyboard__btn keyboard__number" value="5">5</button>
-				<button class="keyboard__btn keyboard__number" value="6">6</button>
-				<button class="keyboard__btn keyboard__number" value="1">1</button>
-				<button class="keyboard__btn keyboard__number" value="2">2</button>
-				<button class="keyboard__btn keyboard__number" value="3">3</button>
-				<button class="keyboard__btn keyboard__number" value="0">0</button>
-				<button class="keyboard__btn keyboard__number keyboard__dot" value=".">.</button>
-				<button class="keyboard__btn keyboard__delete">
+				<button class="keyboard__btn" value="7">7</button>
+				<button class="keyboard__btn" value="8">8</button>
+				<button class="keyboard__btn" value="9">9</button>
+				<button class="keyboard__btn" value="4">4</button>
+				<button class="keyboard__btn" value="5">5</button>
+				<button class="keyboard__btn" value="6">6</button>
+				<button class="keyboard__btn" value="1">1</button>
+				<button class="keyboard__btn" value="2">2</button>
+				<button class="keyboard__btn" value="3">3</button>
+				<button class="keyboard__btn" value="0">0</button>
+				<button class="keyboard__btn keyboard__dot" value=".">.</button>
+				<button class="keyboard__delete">
 					<img class="keyboard__delete-img" src="images/clean-btn.svg" alt="clean">
 				</button>
 			</div>
 			<div class="keyboard__right">
-				<button class="keyboard__btn keyboard__total">
+				<button class="keyboard__equal">
 					<img class="keyboard__img" src="images/equal.svg" alt="equal">
 				</button>
-				<button class="keyboard__btn keyboard__operator" value="+">
+				<button class="keyboard__btn" value="+">
 					<img class="keyboard__img" src="images/sum.svg" alt="sum">
 				</button>
-				<button class="keyboard__btn keyboard__operator" value="-">
+				<button class="keyboard__btn" value="-">
 					<img class="keyboard__img" src="images/minus.svg" alt="minus">
 				</button>
-				<button class="keyboard__btn keyboard__operator" value="/">
+				<button class="keyboard__btn" value="/">
 					<img class="keyboard__img" src="images/divide.svg" alt="divide">
 				</button>
-				<button class="keyboard__btn keyboard__operator" value="*">
+				<button class="keyboard__btn" value="*">
 					<img class="keyboard__img" src="images/multiply.svg" alt="multiply">
 				</button>
-
-
-
-				<button class="keyboard__btn keyboard__clean">
+				<button class="keyboard__clean">
 					<img class="keyboard__img" src="images/trashcan.svg" alt="bin">
 				</button>
 			</div>
 			
 		</div>
 	</div>
-
-
-<!-- <button class="reset">Random</button> -->
-
-
 
 	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 	<script src="js/main.js"></script>

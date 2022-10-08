@@ -14,46 +14,46 @@ input{
 .form {
 	width: 300px;
 	padding: 20px;
-		&__inner{
-			position: relative;
-			display: flex;
-			justify-content: space-between;
-			background-color: rgba(255, 255, 255, 0.075);
-			padding: 10px;
-			border-radius: 8px;
-			margin-bottom: 2px;
-			&::after{
-				content: '';
-				position: absolute;
-				transform: translate(-50%, -50%);
-				top: 50%;
-				left: 120px;
-				width: 8px;
-				height: 14px;
-				background-image: url('/images/arrow.svg');
-			}
-		}
-		&__to-input,
-		&__from-input {
-			background-size: 40px 20px;
-			background-repeat: no-repeat;
-			background-position: 55px 5px;
-			color: #fff;
-			width: 115px;
-			display: flex;
-			align-items: center;
-		}
-		&__result,
-		&__amount{
-			color: #fff;
-			text-align: right;
-			width: 120px;
-			font-size: 26px;
-		}
-		&__descr {
-			display: block;
-			font-size: 12px;
-			height: 18px;
-			margin-bottom: 15px;
-		}
+	height: 160px;
+	transition: all .5s;
+	&__inner{
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		// background-color: rgba(255, 255, 255, 0.075);
+		padding: 10px;
+		border-radius: 8px;
+		margin-bottom: 2px;
+	}
+	&__inner-result{
+		transition: all .5s;
+	}
+	&__to-input,
+	&__from-input {
+		color: #fff;
+		width: 0%;
+		display: flex;
+		align-items: center;
+		transition: opacity .5s;
+		opacity: 0;
+	}
+	&__result,
+	&__amount{
+		color: #fff;
+		text-align: right;
+		width: 100%;
+		font-size: 18px;
+	}
+	&__amount{
+		font-size: 26px;
+
+	}
+	&__descr {
+		display: block;
+		font-size: 12px;
+		height: 18px;
+		margin-bottom: 15px;
+		opacity: 0;
+
+	}
 }

@@ -1,156 +1,77 @@
-document.querySelector(".keyboard__clean").addEventListener("click", cleanCalculator);
-document.querySelector(".keyboard__delete").addEventListener("click", removeLastElem);
-document.querySelector(".keyboard__total").addEventListener("click", calculateTotal);
 
-const calculatorButtons = document.querySelectorAll(".keyboard .keyboard__number");
-const numbers = document.querySelectorAll(".keyboard .keyboard__number"); // Кнопки с символами
-const operators = document.querySelectorAll(".keyboard .keyboard__operator"); // Кнопки с операторами
-const output = document.querySelector(".form__amount"); // Поле вывода результата
+
+const keyboardValues = document.querySelectorAll(".keyboard .keyboard__btn");
 const dotBtn = document.querySelector(".keyboard__dot");
-const dotClick = document.querySelector(".keyboard__dot").addEventListener("click", dotClicked);
-let numberStr = "";
-let mainStr = "";
-let mainArr = [];
-let numberFlag = false;
-let operatorFlag = false;
-let dotFlag = false;
-output.value = "0";
+const equal = document.querySelector(".keyboard__equal")
+const amount = document.querySelector('.form__amount');
+const result = document.querySelector('.form__result');
 
-for(let i = 0; i < calculatorButtons.length; i++){
-	calculatorButtons[i].addEventListener('mousedown', calculatorButtonsActive);
-	function calculatorButtonsActive(){
-		this.classList.add("keyboard__number_active");
-		setTimeout(() => {
-			this.classList.remove("keyboard__number_active");
-		}, 350);
+
+
+function getKeyboardValues(){
+	for(let i = 0; i < keyboardValues.length; i++){
+		keyboardValues[i].addEventListener('click', writeValue);
 	}
+}getKeyboardValues();
+
+function writeValue(){
+	result.innerHTML += this.value;
+	inputValidation ()
 }
 
-function dotClicked(){
-	dotBtn.setAttribute("disabled", "");
-}
-function numberClick(){
-	for(let i = 0; i < numbers.length; i++){
-		numbers[i].addEventListener('click', numberAction);
-	}
-	for(let i = 0; i < operators.length; i++){
-		operators[i].addEventListener('click', operatorAction);
-	}
-}
-function numberAction(){
-	if(numberFlag === false){
-		operatorFlag = false;
-		mainArr.push(this.value);
-		console.log(mainArr);
-		numberFlag = true;
-		mainStr = mainArr.join("");
-		output.value  = mainStr;
-	}else{
-		mainArr[mainArr.length - 1] += this.value;
-		mainStr = mainArr.join("");
-		output.value  = mainStr;
-		console.log(mainArr);
-	}
+function inputValidation () {
+	const numbersArr = result.innerHTML.split(/[-+*\/]/g).filter(el => el);
+	const operatorsArr = result.innerHTML.split(/[\d\.]/g).filter(el => el)
+			.map(el => {
+				return el.length === 1 ? el : el.split('').pop();
+			});
+			result.innerHTML = merge(numbersArr, operatorsArr);
+}inputValidation ()
 
+function merge(a, b) {
+	for (let i = 0; a.length;)
+		b.splice(i++ * 2, 0, a.shift());
+	return b.join('');
 }
-function operatorAction(){
-	if(mainArr.length % 2 !== 0){
-		numberFlag = false;
-		operatorFlag = true;
-		mainArr.push(this.value);
-		console.log(mainArr);
-		mainStr = mainArr.join("");
-		output.value  = mainStr;
-		dotBtn.removeAttribute("disabled", "");
-	}else{
-		mainArr.pop();
-		mainArr.push(this.value);
-		console.log(this.value);
-		console.log(mainArr);
-		mainStr = mainArr.join("");
-		output.value  = mainStr;
-		dotBtn.removeAttribute("disabled", "");
-	}
 
-}
-function cleanCalculator(){
-	numberStr = "";
-	mainStr = "";
-	mainArr = [];
-	numberFlag = false;
-	operatorFlag = false;
-	dotFlag = false;
-	output.value  = mainStr;
-}
-function removeLastElem(){
-	mainArr.pop();
-	numberFlag = false;
-	operatorFlag = false;
-	mainStr = mainArr.join("");
-	output.value  = mainStr;
-	console.log(mainArr);
-}
+document.querySelector(".keyboard__equal").addEventListener("click", calculateTotal);
 function calculateTotal(){
-	if(mainArr.length % 2 !== 0){
-		for(i = 0; i < mainArr.length; i++){
-			if((mainArr[i] === "*") || mainArr[i] === "/"){
-				if(mainArr[i] === "*"){
-					a = mainArr[mainArr.indexOf(mainArr[i]) - 1];
-					b = mainArr[mainArr.indexOf(mainArr[i]) + 1];
-					(mainArr[mainArr.indexOf(mainArr[i]) - 1]) = a * b;
-					mainArr.splice((mainArr.indexOf(mainArr[i]) + 1), 1);
-					mainArr.splice((mainArr.indexOf(mainArr[i])), 1);
-					console.log(mainArr);
-				}else{
-					a = mainArr[mainArr.indexOf(mainArr[i]) - 1];
-					b = mainArr[mainArr.indexOf(mainArr[i]) + 1];
-					mainArr[mainArr.indexOf(mainArr[i]) - 1] = a / b;
-					mainArr.splice((mainArr.indexOf(mainArr[i]) + 1), 1);
-					mainArr.splice((mainArr.indexOf(mainArr[i])), 1);
-					console.log(mainArr)
-			}
-		}
-	}
-	mainStr = mainArr.join('');
-	mainArr = [];
-	mainArr.push(eval(mainStr));
-	mainStr = mainArr.join('');
-	output.value  = mainStr;
-	console.log(eval(mainArr));
-	console.log(eval(mainStr));
-	}else{
-		alert('The example is not complete')
-	}
-	
-
+	result.innerHTML = amount.value = Math.round(parseFloat(eval(result.innerHTML)) * 100) / 100;
 }
 
-numberClick();
+document.querySelector(".keyboard__delete").addEventListener("click", removeLastElem);
+function removeLastElem() {
+	result.innerHTML = result.innerHTML.slice(0, -1);
+}
+
+document.querySelector(".keyboard__clean").addEventListener("click", cleanCalculator);
+function cleanCalculator() {
+	result.innerHTML = '';
+}
 
 // ! //////////////////////////////////////////////////////////////////////
-const toConvertation = () => {
-	toggleCalcToConvert ()
-}
-const toCalculation = () => {
+
+const switchFn = () => {
 	toggleCalcToConvert ()
 }
 
 function toggleCalcToConvert () {
 	calcBtn.classList.toggle('switch-to__active');
 	convertBtn.classList.toggle('switch-to__active');
-	keyboardRight.classList.toggle('keyboard__right_active');
-	keyboardLeft.classList.toggle('keyboard__left_active');
+	keyboardRight.classList.toggle('keyboard_active');
+	convertCurrencies();
 }
 
 const calcBtn = document.querySelector(".switch-to__calc");
 const convertBtn = document.querySelector(".switch-to__convert");
-const keyboardLeft = document.querySelector(".keyboard__left");
-const keyboardRight = document.querySelector(".keyboard__right");
+const keyboard = document.querySelector(".keyboard");
+const form = document.querySelector(".form");
 
-document.querySelector(".switch-to__calc").addEventListener("click", toCalculation);
-document.querySelector(".switch-to__convert").addEventListener("click", toConvertation);
 
-// ! //////////////////////////////////////////////////////////////////////
+document.querySelector(".switch-to__calc").addEventListener("click", switchFn);
+document.querySelector(".switch-to__convert").addEventListener("click", switchFn);
+
+// ! //////////////////////// Get currencies
 const url ='https://cdn.cur.su/api/latest.json';
 
 const from = document.querySelector('.form__from-input');
@@ -159,8 +80,7 @@ const to = document.querySelector('.form__to-input');
 const fromDescr = document.querySelector('.form__from-descr');
 const toDescr = document.querySelector('.form__to-descr');
 
-const amount = document.querySelector('.form__amount');
-const result = document.querySelector('.form__result');
+
 
 let fromFlag = false;
 let toFlag = false;
@@ -377,8 +297,6 @@ const fetchData = async () => {
 }
 fetchData();
 
-
-
 const fromHandler = () => {
 	const fromDescription = document.querySelector('.form__from-descr');
 	const fromValue = from.value = from.value.toUpperCase();
@@ -398,7 +316,6 @@ const fromHandler = () => {
 			result.innerHTML = 0
 	}
 }
-
 const toHandler = () => {
 	const toDescription = document.querySelector('.form__to-descr');
 	const toValue = to.value = to.value.toUpperCase();
@@ -418,7 +335,6 @@ const toHandler = () => {
 			result.innerHTML = 0
 	}
 }
-
 const amountHandler = () => {
 	if(amount.value.length){
 		amountFlag = true;
@@ -433,14 +349,10 @@ const convertCurrencies = () => {
 		result.innerHTML = (Math.floor(output * 100) / 100);
 	}
 }
-// ? Например, мы знаем, что:
-// ? 1 USD = 0.87 EUR,
-// ? 1 USD = 0.73 GBP,
-// ? но как мы узнаем, сколько EUR равняется GBP?
-
-// ? Формула: a / b = c
-// ? EURGBP = (USDGBP / USDEUR) = (0.73 / 0.87) = 0.84
 
 document.querySelector('.form__amount').addEventListener('input', amountHandler);
 document.querySelector('.form__from-input').addEventListener('input', fromHandler);
 document.querySelector('.form__to-input').addEventListener('input', toHandler);
+
+
+
