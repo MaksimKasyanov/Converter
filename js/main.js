@@ -2,8 +2,8 @@ const keyboardValues = document.querySelectorAll(".keyboard .keyboard__btn");
 const dotBtn = document.querySelector(".keyboard__dot");
 const equal = document.querySelector(".keyboard__equal")
 const amount = document.querySelector('.form__amount');
-const result = document.querySelector('.form__result');
-
+const resultCalc = document.querySelector('.form__result-calc');
+const convertResult = document.querySelector('.form__result-convert');
 function getKeyboardValues(){
 	for(let i = 0; i < keyboardValues.length; i++){
 		keyboardValues[i].addEventListener('click', writeValue);
@@ -11,17 +11,25 @@ function getKeyboardValues(){
 }getKeyboardValues();
 
 function writeValue(){
-	result.innerHTML += this.value;
-	inputValidation ()
+	if(keyboard.className !== 'keyboard keyboard_active'){
+		resultCalc.innerHTML += this.value;
+		inputValidation ()
+		convertCurrencies()
+	}
+	if(keyboard.className === 'keyboard keyboard_active'){
+		amount.value += this.value;
+		convertCurrencies()
+	}
+
 }
 
 function inputValidation () {
-	const numbersArr = result.innerHTML.split(/[-+*\/]/g).filter(el => el);
-	const operatorsArr = result.innerHTML.split(/[\d\.]/g).filter(el => el)
+	const numbersArr = resultCalc.innerHTML.split(/[-+*\/]/g).filter(el => el);
+	const operatorsArr = resultCalc.innerHTML.split(/[\d\.]/g).filter(el => el)
 			.map(el => {
 				return el.length === 1 ? el : el.split('').pop();
 			});
-			result.innerHTML = merge(numbersArr, operatorsArr);
+			resultCalc.innerHTML = merge(numbersArr, operatorsArr);
 }inputValidation ()
 
 function merge(a, b) {
@@ -32,17 +40,17 @@ function merge(a, b) {
 
 document.querySelector(".keyboard__equal").addEventListener("click", calculateTotal);
 function calculateTotal(){
-	result.innerHTML = amount.value = Math.round(parseFloat(eval(result.innerHTML)) * 100) / 100;
+	resultCalc.innerHTML = amount.value = Math.round(parseFloat(eval(resultCalc.innerHTML)) * 100) / 100;
 }
 
 document.querySelector(".keyboard__delete").addEventListener("click", removeLastElem);
 function removeLastElem() {
-	result.innerHTML = result.innerHTML.slice(0, -1);
+	resultCalc.innerHTML = resultCalc.innerHTML.slice(0, -1);
 }
 
 document.querySelector(".keyboard__clean").addEventListener("click", cleanCalculator);
 function cleanCalculator() {
-	result.innerHTML = '';
+	resultCalc.innerHTML = '';
 }
 
 // ! //////////////////////////////////////////////////////////////////////
@@ -343,7 +351,7 @@ const amountHandler = () => {
 const convertCurrencies = () => {
 	if(fromFlag && toFlag && amountFlag){
 		const output = (mainData.rates[to.value] / mainData.rates[from.value]) * amount.value
-		result.innerHTML = (Math.floor(output * 100) / 100);
+		convertResult.innerHTML = (Math.floor(output * 100) / 100);
 	}
 }
 

@@ -19,7 +19,7 @@ input{
 	&_active{
 		.form{
 			&__inner{
-				background-color: rgba(255, 255, 255, 0.075);
+				background-color: rgb(29, 29, 29);
 				margin-bottom: 2px;
 			}
 			&__to-input,
@@ -29,7 +29,11 @@ input{
 			}
 			&__result,
 			&__amount{
+				background-color: rgb(29, 29, 29);
 				width: 50%;
+			}
+			&__result-calc{
+				z-index: -2;
 			}
 		}
 	}
@@ -43,6 +47,7 @@ input{
 		margin-bottom: 2px;
 	}
 	&__inner-result{
+		position: relative;
 		transition: all .5s;
 	}
 	&__to-input,
@@ -64,6 +69,15 @@ input{
 		width: 100%;
 		font-size: 25px;
 		font-family: 'PT Mono', monospace;
+	}
+	&__result{
+		position: absolute;
+		right: 10px;
+		width: calc(100% - 20px);
+		background-color: #0f0f0f;
+	}
+	&__result-calc{
+		z-index: 2;
 	}
 	&__amount{
 		font-size: 26px;
