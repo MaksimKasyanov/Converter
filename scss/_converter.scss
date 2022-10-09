@@ -16,6 +16,23 @@ input{
 	padding: 20px;
 	height: 160px;
 	transition: all .5s;
+	&_active{
+		.form{
+			&__inner{
+				background-color: rgba(255, 255, 255, 0.075);
+				margin-bottom: 2px;
+			}
+			&__to-input,
+			&__from-input {
+				width: 50%;
+				opacity: 1;
+			}
+			&__result,
+			&__amount{
+				width: 50%;
+			}
+		}
+	}
 	&__inner{
 		position: relative;
 		display: flex;
@@ -36,13 +53,17 @@ input{
 		align-items: center;
 		transition: opacity .5s;
 		opacity: 0;
+		background-size: auto 20px;
+		background-repeat: no-repeat;
+		background-position: 60px;
 	}
 	&__result,
 	&__amount{
 		color: #fff;
 		text-align: right;
 		width: 100%;
-		font-size: 18px;
+		font-size: 25px;
+		font-family: 'PT Mono', monospace;
 	}
 	&__amount{
 		font-size: 26px;

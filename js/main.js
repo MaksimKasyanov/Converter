@@ -1,12 +1,8 @@
-
-
 const keyboardValues = document.querySelectorAll(".keyboard .keyboard__btn");
 const dotBtn = document.querySelector(".keyboard__dot");
 const equal = document.querySelector(".keyboard__equal")
 const amount = document.querySelector('.form__amount');
 const result = document.querySelector('.form__result');
-
-
 
 function getKeyboardValues(){
 	for(let i = 0; i < keyboardValues.length; i++){
@@ -58,7 +54,8 @@ const switchFn = () => {
 function toggleCalcToConvert () {
 	calcBtn.classList.toggle('switch-to__active');
 	convertBtn.classList.toggle('switch-to__active');
-	keyboardRight.classList.toggle('keyboard_active');
+	keyboard.classList.toggle('keyboard_active');
+	form.classList.toggle('form_active');
 	convertCurrencies();
 }
 
