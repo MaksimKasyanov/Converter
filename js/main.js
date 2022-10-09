@@ -18,6 +18,7 @@ function writeValue(){
 	}
 	if(keyboard.className === 'keyboard keyboard_active'){
 		amount.value += this.value;
+		inputValidation ()
 		convertCurrencies()
 	}
 
@@ -45,7 +46,17 @@ function calculateTotal(){
 
 document.querySelector(".keyboard__delete").addEventListener("click", removeLastElem);
 function removeLastElem() {
-	resultCalc.innerHTML = resultCalc.innerHTML.slice(0, -1);
+	if(keyboard.className !== 'keyboard keyboard_active'){
+		resultCalc.innerHTML = resultCalc.innerHTML.slice(0, -1);
+		inputValidation ()
+		convertCurrencies()
+	}
+	if(keyboard.className === 'keyboard keyboard_active'){
+		amount.value = amount.value.slice(0, -1);
+		inputValidation ()
+		convertCurrencies()
+	}
+	
 }
 
 document.querySelector(".keyboard__clean").addEventListener("click", cleanCalculator);
