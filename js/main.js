@@ -334,7 +334,7 @@ const toHandler = () => {
 	}else{
 		to.style.backgroundImage = "none";
 		toValue.length === 0 
-			? toDescr.innerHTML = `Enter a currency` 
+			? toDescr.innerHTML = `Expecting format - 'USD'` 
 			: toDescr.innerHTML = `${toValue} currency doesn't exist`;
 			toFlag = false;
 			result.innerHTML = 0
